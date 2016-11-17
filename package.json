@@ -1,0 +1,24 @@
+{
+  "name": "SimpleNodeMysqlClient",
+  "author" : {
+    "name" : "Julian Vives",
+    "email": "vivesjulian@gmail.com"
+  },
+  "license": "MIT",
+  "bugs" : "https://github.com/Ekzer/SimpleNodeMysqlClient/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ekzer/SimpleNodeMysqlClient.git"
+  },
+  "homepage": "https://github.com/Ekzer/SimpleNodeMysqlClient/",
+  "version": "1",
+  "dependencies": {
+    "async": "^2.1.2",
+    "mysql": "^2.12.0"
+  },
+  "files": [
+    "lib/",
+    ".gitignore",
+    "package.json"
+  ]
+}

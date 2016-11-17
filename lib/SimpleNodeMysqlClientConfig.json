@@ -1,0 +1,7 @@
+{
+  "host"      : "localhost",
+  "user"      : "root",
+  "password"  : "toor",
+  "database"  : "acretion_www_bo",
+  "multipleStatement" : true
+}
