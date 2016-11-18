@@ -208,7 +208,6 @@ module.exports = function (mysqlConfigFilename) {
                     }
                 });
             } else {
-                // Transaction
                 currentProcess._multipleQueries(queries, function (err, results) {
                     if (err) {
                         return callback(err, null);
