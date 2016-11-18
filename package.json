@@ -17,8 +17,10 @@
     "mysql": "^2.12.0"
   },
   "files": [
-    "lib/",
+    "index.js",
     ".gitignore",
-    "package.json"
+    "package.json",
+    "ExampleSimpleNodeMysqlClientConfig.json",
+    "README.md"
   ]
 }
