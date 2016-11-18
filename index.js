@@ -10,19 +10,19 @@
  * @constructor
  */
 
-var SimpleNodeMysqlCLient = function () {
+var SimpleNodeMysqlCLient = function (mysqlConfigFilename) {
     /**
      * Mysql's config
      * @type {JSON}
      * @private
      */
 
-    var mysqlConfig = require('./SimpleNodeMysqlClientConfig.json');
+    var mysqlConfig = require(mysqlConfigFilename);
 
     /**
      * Async instance
      * @type {Async}
-     * @private
+     * @priviliged
      */
 
     this._asyncInstance = require('async');
@@ -30,11 +30,11 @@ var SimpleNodeMysqlCLient = function () {
     /**
      * Node-mysql instance
      * @type {Connection}
-     * @private
+     * @priviliged
      */
 
-    this._mysqlInstance = require('mysql').createConnection(databaseConfig);
-}
+    this._mysqlInstance = require('mysql').createConnection(mysqlConfig);
+};
 
 /**
  * Returns mysql's hostname
@@ -43,7 +43,7 @@ var SimpleNodeMysqlCLient = function () {
 
 SimpleNodeMysqlCLient.prototype.getDbHost = function () {
     return this._mysqlInstance.config.host;
-}
+};
 
 /**
  * Returns mysql's user
@@ -52,7 +52,7 @@ SimpleNodeMysqlCLient.prototype.getDbHost = function () {
 
 SimpleNodeMysqlCLient.prototype.getDbUser = function () {
     return this._mysqlInstance.config.user;
-}
+};
 
 /**
  * Returns mysql's password
@@ -61,7 +61,7 @@ SimpleNodeMysqlCLient.prototype.getDbUser = function () {
 
 SimpleNodeMysqlCLient.prototype.getDbPassword = function () {
     return this._mysqlInstance.config.password;
-}
+};
 
 /**
  * Returns database's name
@@ -70,7 +70,7 @@ SimpleNodeMysqlCLient.prototype.getDbPassword = function () {
 
 SimpleNodeMysqlCLient.prototype.getDbName = function () {
     return this._mysqlInstance.config.database;
-}
+};
 
 /**
  * Check if it is a single query.
@@ -83,7 +83,7 @@ SimpleNodeMysqlCLient.prototype.getDbName = function () {
 
 SimpleNodeMysqlCLient.prototype.isSingleQuery = function (str) {
     return (str.match(/;/g).length  === 1) ? (true) : (false);
-}
+};
 
 /**
  * Internal function. Please use query() method !
@@ -101,7 +101,7 @@ SimpleNodeMysqlCLient.prototype._simpleQuery = function (query, callback) {
             return callback(null, results);
         }
     });
-}
+};
 
 /**
  * Internal function. Please use query() method !
@@ -137,7 +137,7 @@ SimpleNodeMysqlCLient.prototype._multipleQueries = function (queries, callback) 
             });
         }
     });
-}
+};
 
 /**
  * Execute mysql query recursively. It can take an array of queries or simply a string. As you want !
@@ -171,15 +171,15 @@ SimpleNodeMysqlCLient.prototype.query = function (queries, process, callback) {
     var errorsList=[];
     var resultsList=[];
     if (queries.constructor === Array) {
-        async.map(querie,currentProcess.query.bind({parentProcess : currentProcess}) ,function(err,resultats) {
+        this._asyncInstance.map(querie,currentProcess.query.bind({parentProcess : currentProcess}) ,function(err,resultats) {
             if(err){errorsList.push(err);}
             else{resultsList.push(resultats);}
             if(errorsList.length>0){return callback(errorsList,resultsList);}
             else{return callback(null,resultsList); }
         });
     } else {
-        if (this.isSimpleQuery(queries)) {
-            async.map([queries] , currentProcess._simpleQuery , function(err,resultats){
+        if (this.isSingleQuery(queries)) {
+            this._asyncInstance.map([queries] , currentProcess._simpleQuery.bind(this) , function(err,resultats){
                     if (err) {
                         return callback(err,null);
                     } else {
@@ -189,7 +189,7 @@ SimpleNodeMysqlCLient.prototype.query = function (queries, process, callback) {
             );
 
         } else {
-            async.map([queries] , currentProcess._multipleQueries , function(err,resultats){
+            this._asyncInstance.map([queries] , currentProcess._multipleQueries.bind(this) , function(err,resultats){
                     if (err) {
                         return callback(err,null);
                     } else {
@@ -200,6 +200,6 @@ SimpleNodeMysqlCLient.prototype.query = function (queries, process, callback) {
 
         }
     }
-}
+};
 
-module.exports = SimpleNodeMysqlCLient;
+module.exports = new SimpleNodeMysqlCLient;

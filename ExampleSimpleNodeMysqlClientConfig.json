@@ -2,6 +2,6 @@
   "host"      : "localhost",
   "user"      : "root",
   "password"  : "toor",
-  "database"  : "acretion_www_bo",
+  "database"  : "test",
   "multipleStatement" : true
 }
