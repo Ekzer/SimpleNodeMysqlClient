@@ -1,11 +1,13 @@
 {
   "name": "SimpleNodeMysqlClient",
-  "author" : {
-    "name" : "Julian Vives",
+  "author": {
+    "name": "Julian Vives",
     "email": "vivesjulian@gmail.com"
   },
   "license": "MIT",
-  "bugs" : "https://github.com/Ekzer/SimpleNodeMysqlClient/issues",
+  "bugs": {
+    "url": "https://github.com/Ekzer/SimpleNodeMysqlClient/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ekzer/SimpleNodeMysqlClient.git"
@@ -22,5 +24,13 @@
     "package.json",
     "ExampleSimpleNodeMysqlClientConfig.json",
     "README.md"
-  ]
+  ],
+  "gitHead": "8db1802e609fca300c3f34bdcdd843b12694a374",
+  "readme": "# SimpleNodeMysqlClient\nSimple Node.Js mysql client.  \n",
+  "readmeFilename": "README.md",
+  "description": "Simple Node.Js mysql client.",
+  "_id": "SimpleNodeMysqlClient@1.0.0",
+  "_shasum": "9116c18013f05f45eb8471fbe39c670802d58667",
+  "_from": "git://github.com/Ekzer/SimpleNodeMysqlClient.git",
+  "_resolved": "git://github.com/Ekzer/SimpleNodeMysqlClient.git#8db1802e609fca300c3f34bdcdd843b12694a374"
 }
